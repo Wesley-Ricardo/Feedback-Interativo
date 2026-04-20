@@ -1,0 +1,27 @@
+sanduiches = ["Top 1", "Top 2", "Top 3", "Top 4", "Top 5"]
+bebidas = ["Creme", "Suco", "Açai"]
+
+avaliacoes = {}
+
+for item in sanduiches:
+    while True:
+        nota = int(input(f"Avalie a qualidade do sanduíche {item} (1 a 5): "))
+        if 1 <= nota <= 5:
+            avaliacoes[item] = nota
+            break
+        else:
+            print("Digite uma nota entre 1 e 5.")
+
+for item in bebidas:
+    while True:
+        nota = int(input(f"Avalie a qualidade da bebida {item} (1 a 5): "))
+        if 1 <= nota <= 5:
+            avaliacoes[item] = nota
+            break
+        else:
+            print("Digite uma nota entre 1 e 5.")
+
+# Mostrar media das avaliações
+print("\nAvaliações:")
+for item, nota in avaliacoes.items():
+    print(f"{item}: {nota}")
