@@ -1,24 +1,53 @@
+print("TOP LANCHES")
+print("Obrigado por participar desta avaliação, por favor selecione o tipo de atendimento")
+
+opcao = input("Digite (1 - delivery / 2 - mesa): ")
+
+if opcao == "1":
+    print("Você selecionou delivery")
+elif opcao == "2":
+    print("Você selecionou mesa")
+else:
+    print("Opção inválida")
+
+
 def pedir_nota(categoria):
     while True:
         try:
-            nota = int(input(f"Avalie {categoria} (1 a 5): "))
-            if 1 <= nota <= 5:
+            nota = int(input(f"Avalie {categoria} (1 a 5) ou 0 para voltar: "))
+            if 0 <= nota <= 5:
                 return nota
             else:
-                print("Digite uma nota entre 1 e 5.")
+                print("Digite uma nota entre 1 e 5 ou 0 para voltar.")
         except ValueError:
             print("Digite um número válido.")
 
 
-avaliacoes = {
-    "Sanduíches": pedir_nota("a qualidade dos sanduíches"),
-    "Bebidas": pedir_nota("a qualidade das bebidas"),
-    "Atendimento no balcão": pedir_nota("o atendimento no balcão"),
-    "Atendimento à mesa": pedir_nota("o atendimento à mesa"),
-    "Qualidade da maionese": pedir_nota("a qualidade da maionese"),
-    "Limpeza do ambiente": pedir_nota("a limpeza do ambiente")
-}
+categorias = [
+    ("Sanduíches", "a qualidade dos sanduíches"),
+    ("Bebidas", "a qualidade das bebidas"),
+    ("Atendimento no balcão", "o atendimento no balcão"),
+    ("Atendimento à mesa", "o atendimento à mesa"),
+    ("Qualidade da maionese", "a qualidade da maionese"),
+    ("Limpeza do ambiente", "a limpeza do ambiente")
+]
 
-print("\nAvaliação geral:")
-for categoria, nota in avaliacoes.items():
-    print(f"{categoria}: {nota}")
+avaliacoes = {}
+i = 0
+
+while i < len(categorias):
+    nome, descricao = categorias[i]
+    nota = pedir_nota(descricao)
+
+    if nota == 0:
+        if i > 0:
+            i -= 1  # volta para a anterior
+        else:
+            print("Você já está na primeira avaliação.")
+    else:
+        avaliacoes[nome] = nota
+        i += 1  # vai para a próxima
+
+print("\nAvaliações finais:")
+for k, v in avaliacoes.items():
+    print(f"{k}: {v}")
